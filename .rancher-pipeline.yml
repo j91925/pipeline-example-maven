@@ -2,16 +2,18 @@ stages:
 - name: Build
   steps:
   - runScriptConfig:
-      image: maven:3-jdk-7
-      shellScript: |-
-        mvn clean install
+      image: 192.168.200.71/rancher/maven:3-jdk-8
+      shellScript: mvn clean install
 - name: Publish
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: example-greenhouse:${CICD_EXECUTION_SEQUENCE}
+      tag: prometheus/example-greenhouse:${CICD_EXECUTION_SEQUENCE}
+      pushRemote: true
+      registry: 192.168.200.71
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
+notification: {}
