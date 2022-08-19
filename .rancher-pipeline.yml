@@ -9,8 +9,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: prometheus/example-greenhouse:${CICD_EXECUTION_SEQUENCE}
-      pushRemote: true
+      tag: example-greenhouse:${CICD_EXECUTION_SEQUENCE}
       registry: 192.168.200.71
 - name: Deploy
   steps:
